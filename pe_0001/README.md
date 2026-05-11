@@ -65,7 +65,7 @@ If we are not cautious, it is easy to think that since we need the sum of the mu
 that the answer is just $S_3 + S_5$. However, this would be a mistake because we would be including some
 numbers twice, namely, the multiples of 15.
 
-This is due to a property of families of natural numbers:
+Its easy to see this if we use set theory:
 
 $\sum{A} + \sum{B} = \sum{A\cup B} + \sum{A\cap B}$
 

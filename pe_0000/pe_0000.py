@@ -1,7 +1,7 @@
 """
-Template for a Project Euler problem solution.
+Implementation of the solutions for the problem 0 of Project Euler
 
-Copy this folder, rename it, and update the placeholders.
+See the README file for the explanation of the solutions
 """
 
 import sys

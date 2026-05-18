@@ -82,4 +82,4 @@ def solution_2(limit: int) -> int:
 
 # Helpful Links
 
-- Add references here.
+- [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence)

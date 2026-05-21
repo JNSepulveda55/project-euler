@@ -1,4 +1,6 @@
-# Project_Euler
+# Project Euler
+
+
 
 My solutions to all of the project euler problems I've solved, with explained solutions. (In progress)
 

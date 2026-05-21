@@ -1,4 +1,10 @@
-from utils import timer, divisors_alter, fast_divisors, factors, divisors
+# from utils import timer, divisors_alter, fast_divisors, factors, divisors
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from utils import timer
 from sympy import divisors as divisors_sympy
 
 @timer

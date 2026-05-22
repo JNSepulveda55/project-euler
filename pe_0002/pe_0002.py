@@ -66,6 +66,5 @@ def solution_2(limit: int) -> int:
 
 if __name__ == "__main__":
     limit = 4_000_000
-
-    print(solution_1(limit))
-    print(solution_2(limit))
+    solution_1(limit)
+    solution_2(limit)

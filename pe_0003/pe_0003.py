@@ -38,5 +38,5 @@ def solution(n: int) -> int:
 
 if __name__ == "__main__":
     n = 600851475143
-
-    print(solution(n))
+    
+    solution(n)

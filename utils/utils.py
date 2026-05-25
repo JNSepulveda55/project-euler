@@ -27,6 +27,9 @@ def is_prime(n: int) -> bool:
     Check if a positive integer is a prime number.
     From PE_0003.
     """
+    if n < 2:           # Edge case
+        return False
+
     sqrtn = n ** 0.5
     for i in range(2, int(sqrtn) + 1):
 
@@ -36,3 +39,10 @@ def is_prime(n: int) -> bool:
 
     # It finished the loop so it has no divisors. Return True
     return True
+
+def is_palindrome(n: int) -> bool:
+    """
+    Returns True if the number reads the same l2r and r2l
+    From PE_0004
+    """
+    return str(n) == str(n)[::-1] 

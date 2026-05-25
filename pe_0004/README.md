@@ -5,14 +5,7 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 
 Find the largest palindrome made from the product of two $3$-digit numbers.
 
-# Notes
-
-- Add examples from the prompt here.
-- Add any observations or math shortcuts here.
-
 # Solutions
-
-## Solution 1
 
 This is a very straightforward problem. 
 
@@ -32,6 +25,8 @@ def is_palindrome(n: int) -> bool:
     """Returns True if the number reads the same l2r and r2l"""
     return str(n) == str(n)[::-1] 
 ```
+
+## Solution 1
 
 With this, we can implement a simple function that checks for the the biggest palindromic product of two three-digit numbers:
 

@@ -56,6 +56,8 @@ def is_prime(n: int) -> bool:
     return True
 ```
 
+We will add this function to our [`utils`](../utils/utils.py) file to be used in later problems
+
 Now we code the solution:
 
 ```py

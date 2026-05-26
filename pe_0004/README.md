@@ -26,6 +26,9 @@ def is_palindrome(n: int) -> bool:
     return str(n) == str(n)[::-1] 
 ```
 
+We will add this function to our [`utils`](../utils/utils.py) file to be used in later problems
+
+
 ## Solution 1
 
 With this, we can implement a simple function that checks for the the biggest palindromic product of two three-digit numbers:
@@ -41,7 +44,7 @@ def solution_1(digits: int) -> int:
 
     return largest
 ```
-Its left as an excercise for the reader to think about why we use `10**(digits-1)` and `10**digits` 
+Its left as an excercise for the reader to think about why we use `10**(digits-1)` and `10**digits` as limits in the loop
 
 # Helpful Links
 

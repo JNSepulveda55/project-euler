@@ -27,7 +27,8 @@ def is_prime(n: int) -> bool:
     Check if a positive integer is a prime number.
     From PE_0003.
     """
-    if n < 2:           # Edge case
+    # Edge case not covered in the problem but necessary
+    if n < 2:
         return False
 
     sqrtn = n ** 0.5

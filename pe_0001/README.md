@@ -5,6 +5,10 @@ If we list all the natural numbers below $10$ that are multiples of $3$ or $5$, 
 
 Find the sum of all the multiples of $3$ or $5$ below $1000$.
 
+# Notes
+
+- Refer first to [Problem 6](../pe_0006/README.md) if you want a similar problem
+
 # Solutions
 
 ## Solution 1:

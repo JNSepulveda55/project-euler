@@ -105,4 +105,5 @@ def solution_2(limit: int) -> int:
 
 # Helpful Links
 
-- Add references here.
+- [Fundamental theorem of arithmetic](https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic)
+

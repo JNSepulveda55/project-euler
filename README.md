@@ -29,7 +29,9 @@ python3 create_problem.py 42 --destination-root /path/to/output
 
 The script needs network access when it fetches the problem statement from `projecteuler.net`.
 
-Notes for self (18/05/2026)
+Notes for self
 
-- Only show alternative solutions if its worth it. Most problems from 1 to 100 can be solved with brute force algorithms anyway
+- Only show alternative solutions if its worth it. Most problems from 1 to 100 can be solved with brute force algorithms anyway (18/05/2026)
+
+- If a solution runs in less than a second, I probably won't bother in optimizing it, specially for easier problems
 

@@ -7,10 +7,6 @@ The next such arrangement, for which there is exactly $50\%$ chance of taking tw
 
 By finding the first arrangement to contain over $10^{12} = 1\,000\,000\,000\,000$ discs in total, determine the number of blue discs that the box would contain.
 
-# Notes
-
-- Add examples from the prompt here.
-- Add any observations or math shortcuts here.
 
 # Solutions
 

@@ -144,4 +144,4 @@ def solution_1(limit: int) -> int:
 
 # Helpful Links
 
-- Add references here.
+- [Diophantine equation](https://en.wikipedia.org/wiki/Diophantine_equation)

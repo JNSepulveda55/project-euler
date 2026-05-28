@@ -35,3 +35,6 @@ Notes for self
 
 - If a solution runs in less than a second, I probably won't bother in optimizing it, specially for easier problems
 
+# Contributions
+
+Want to contribute with a problem I havent solved yet? Have a different approach to an already solved problem? Feel free to issue a pull request! I'll review the changes and merge if I feel it matches the style of the repo and could be valuable to add.

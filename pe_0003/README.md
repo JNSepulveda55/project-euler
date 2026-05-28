@@ -24,8 +24,8 @@ From this, we can see that divisors come in pairs, since if $a$ is a divisor of 
 
 Assume $a \neq b$
 
-- If $a < \sqrt{n}$ and $b < \sqrt{n}$ then $a \cdot b < \sqrt{n} \cdot \sqrt{n} = n$ $(\to \gets)$
-- If $a > \sqrt{n}$ and $b > \sqrt{n}$ then $a \cdot b > \sqrt{n} \cdot \sqrt{n} = n$ $(\to \gets)$
+- If $a < \sqrt{n}$ and $b < \sqrt{n}$ then $a \cdot b < \sqrt{n} \cdot \sqrt{n} = n$ $(\longrightarrow \longleftarrow)$
+- If $a > \sqrt{n}$ and $b > \sqrt{n}$ then $a \cdot b > \sqrt{n} \cdot \sqrt{n} = n$ $(\longrightarrow \longleftarrow)$
 
 The only option left is that $a < \sqrt{n} < b$
 

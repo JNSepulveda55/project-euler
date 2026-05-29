@@ -14,7 +14,7 @@ from utils import timer
 
 
 @timer
-def solution_1(digit_string: str, window_size) -> int:
+def solution_1(digit_string: str, window_size: int) -> int:
     product = 1
     zeros_in_window = 0  # Keep track of zeros in the window
 

@@ -38,7 +38,7 @@ Finally, you may have noticed that we might have problems if we get a $0$ in our
 We can translate this method to a python function like this:
 
 ```py
-def solution_1(digit_string: str, window_size) -> int:
+def solution_1(digit_string: str, window_size: int) -> int:
     product = 1
     zeros_in_window = 0  # Keep track of zeros in the window
 
@@ -68,7 +68,6 @@ def solution_1(digit_string: str, window_size) -> int:
         
         if product > max_product and zeros_in_window == 0:
             max_product = product
-            print(digit_string[i:i+window_size])
 
     return max_product
 ```

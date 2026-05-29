@@ -94,6 +94,8 @@ def number_of_divisors(n: int) -> int:
     return total
 ```
 
+We'll add both of these functions fo our [utils](../utils/utils.py) file.
+
 With this, we can find the number of divisors of any integer. Now we're ready to implement our final solution
 
 ```py

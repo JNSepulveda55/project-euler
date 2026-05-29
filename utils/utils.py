@@ -62,20 +62,33 @@ def is_palindrome(n: int) -> bool:
 
 def sieve_of_eratosthenes(n: int) -> list:
     """
-    Find all primes under n and returns them as a list.
+    Find all primes under a limit n and returns them as a list.
     From PE_0010
     """
+    if n <= 1:  # Edge case
+        return []
+    
+    if n == 2:
+        return [2]
 
-    # [0, 1, 2] + [odd, even] and so on
-    sieve = [False, False, True] + [True, False] * (n//2 - 1)
-    p = 2
+    # [0, 1, 2] + [odd, even] (n//2 - 1) times + [odd] if n is odd
+    sieve = [False, False, True] + [True, False] * (n//2 - 1) + ([False] if n%2 else [])
+    p = 1
     while p * p <= n:
         # Find next non-crossed number
-        p += 1
+        p += 2
         while p * p < n and not sieve[p]:
-            p += 1
+            p += 2
 
         # Cross out non-primes
         sieve[p*p::p] = [False] * ((n - p**2)//p + 1) 
         
     return [i for i in range(n) if sieve[i]]
+
+
+if __name__ == "__main__":
+    
+    for n in range(100):
+        print(f"n: {n} ->", sieve_of_eratosthenes(n))
+    
+    # print(sieve_of_eratosthenes(12))

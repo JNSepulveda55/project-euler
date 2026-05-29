@@ -15,12 +15,14 @@ from utils import timer, is_prime
 @timer(print_result=False)
 def sieve_of_eratosthenes(n: int) -> list:
     """
-    Find all primes under a limit n and
-    returns them as a list.
+    Find all primes under a limit n and returns them as a list.
+    From PE_0010
     """
+    if n <= 1:  # Edge case
+        return []
 
-    # [0, 1, 2] + [odd, even] and so on
-    sieve = [False, False, True] + [True, False] * (n//2 - 1)
+    # [0, 1, 2] + [odd, even] (n//2 - 1) times + [odd] if n is odd
+    sieve = [False, False, True] + [True, False] * (n//2 - 1) + ([False] if n%2 else [])
     p = 2
     while p * p <= n:
         # Find next non-crossed number

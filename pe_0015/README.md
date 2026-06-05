@@ -8,10 +8,6 @@ Starting in the top left corner of a $2 \times 2$ grid, and only being able to m
 
 How many such routes are there through a $20 \times 20$ grid?
 
-# Notes
-
-- Add examples from the prompt here.
-- Add any observations or math shortcuts here.
 
 # Solutions
 

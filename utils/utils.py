@@ -86,6 +86,49 @@ def sieve_of_eratosthenes(n: int) -> list:
     return [i for i in range(n) if sieve[i]]
 
 
+def prime_decomposition(n: int) -> dict:
+    """
+    Find the prime decomposition of an integer.
+    Return format is a dictionary with entries {prime: power}.
+    From PE_0012
+    """
+
+    if n <= 1:
+        return {}  # Edge case
+    
+    decomposition = {}
+
+    for i in range(n//2 + 1):
+
+        if is_prime(i):
+            if n % i == 0:
+                decomposition[i] = 0  # Create dictionary entry for prime
+
+            while n % i == 0:
+                n //= i
+                decomposition[i] += 1  # Update exponent for prime
+
+        if n == 1:
+            break
+
+    return decomposition
+
+
+def factorial(n: int) -> int:
+    """
+    Compute the factorial of a number.
+    From PE_0015
+    """
+
+    assert n > 0 and int(n), "n should be non-negative"
+    assert int(n) == n, "n should be an integer"
+
+    result = 1
+    for i in range(1, n+1):
+        result *= i
+
+    return result
+
 if __name__ == "__main__":
     
     for n in range(100):

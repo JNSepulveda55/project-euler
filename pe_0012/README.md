@@ -77,6 +77,8 @@ def prime_decomposition(n: int) -> dict:
     return decomposition
 ```
 
+We'll add this function to our [`utils.py`](../utils/utils.py) file.
+
 Next, we need a function to calculate the number of divisors of a number from its prime decomposition:
 
 ```py

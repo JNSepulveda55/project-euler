@@ -129,9 +129,26 @@ def factorial(n: int) -> int:
 
     return result
 
+
+def divisors(n: int, proper: bool = False) -> list[int]:
+    """
+    Find the divisors of a number.
+    Returns a list of unordered divisors.
+    From PE_0021
+    """
+    if proper:
+        divisors = [1]
+    else:
+        divisors = [1, n]
+
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            divisors.append(i)
+            divisors.append(n//i)
+
+    return divisors
+
+
 if __name__ == "__main__":
     
-    for n in range(100):
-        print(f"n: {n} ->", sieve_of_eratosthenes(n))
-    
-    # print(sieve_of_eratosthenes(12))
+    pass

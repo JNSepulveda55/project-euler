@@ -120,7 +120,7 @@ def factorial(n: int) -> int:
     From PE_0015
     """
 
-    assert n > 0 and int(n), "n should be non-negative"
+    assert n >= 0,      "n should be non-negative"
     assert int(n) == n, "n should be an integer"
 
     result = 1

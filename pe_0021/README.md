@@ -28,7 +28,9 @@ def divisors(n: int, proper: bool = False) -> list[int]:
     for i in range(2, int(n**0.5)+1):
         if n % i == 0:
             divisors.append(i)
-            divisors.append(n//i)
+            
+            if n//i != i:
+                divisors.append(n//i)
 
     return divisors
 ```

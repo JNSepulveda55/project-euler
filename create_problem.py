@@ -174,7 +174,7 @@ def create_problem(problem_number: int, destination_root: Path | str | None = No
     padded_number = f"{problem_number:04d}"
     target_dir = destination_root / f"pe_{padded_number}"
     if target_dir.exists():
-        raise FileExistsError(f"Target folder already exists: {target_dir}")
+        raise FileExistsError(f"Refusing to overwrite existing folder: {target_dir}")
 
     title = fetch_problem_title(problem_number)
     statement = fetch_problem_statement(problem_number)
@@ -215,10 +215,14 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    created_path = create_problem(
-        problem_number=args.problem_number,
-        destination_root=args.destination_root,
-    )
+    try:
+        created_path = create_problem(
+            problem_number=args.problem_number,
+            destination_root=args.destination_root,
+        )
+    except FileExistsError as exc:
+        parser.exit(status=1, message=f"{exc}\n")
+
     print(f"Created {created_path}")
 
 

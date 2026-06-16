@@ -101,6 +101,7 @@ def sanitize_statement_content(content: str) -> str:
     content = re.sub(r"</p>", "", content, flags=re.IGNORECASE)
     content = absolutize_relative_links(content)
     content = re.sub(r"\n{3,}", "\n\n", content)
+    content = content.replace("&amp;", "&")
     return content.strip()
 
 

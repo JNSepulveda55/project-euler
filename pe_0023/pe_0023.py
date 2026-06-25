@@ -34,13 +34,5 @@ def solution_1(limit: int = 28123) -> int:
     return sum(non_abundant_sums)
 
 
-@timer
-def solution_2(limit: int) -> int:
-    """
-    Replace this with a faster or cleaner solution.
-    """
-    raise NotImplementedError("Implement solution_2 for this problem.")
-
-
 if __name__ == "__main__":
     solution_1()

@@ -48,15 +48,6 @@ def solution_1(digit_string: str, window_size: int) -> int:
 
     return max_product
 
-
-@timer
-def solution_2(limit: int) -> int:
-    """
-    Replace this with a faster or cleaner solution.
-    """
-    raise NotImplementedError("Implement solution_2 for this problem.")
-
-
 if __name__ == "__main__":
     digit_string = "73167176531330624919225119674426574742" \
     "35534919493496983520312774506326239578318016984801869" \

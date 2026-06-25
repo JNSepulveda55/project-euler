@@ -23,15 +23,6 @@ def solution_1(n: int) -> int:
             if c % 1 == 0 and a + b + int(c) == n:
                 return int(a * b * c)
 
-
-@timer
-def solution_2(limit: int) -> int:
-    """
-    Replace this with a faster or cleaner solution.
-    """
-    raise NotImplementedError("Implement solution_2 for this problem.")
-
-
 if __name__ == "__main__":
     n = 1000
 

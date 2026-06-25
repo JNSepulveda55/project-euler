@@ -38,15 +38,6 @@ def solution_1(triangle: int) -> int:
 
     return find_max_sum()
 
-
-@timer
-def solution_2(limit: int) -> int:
-    """
-    Replace this with a faster or cleaner solution.
-    """
-    raise NotImplementedError("Implement solution_2 for this problem.")
-
-
 if __name__ == "__main__":
     triangle = """75
 95 64

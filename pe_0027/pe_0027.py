@@ -45,14 +45,6 @@ def solution_1(max_a: int, max_b: int) -> int:
     return best_a * best_b
 
 
-@timer
-def solution_2(limit: int) -> int:
-    """
-    Replace this with a faster or cleaner solution.
-    """
-    raise NotImplementedError("Implement solution_2 for this problem.")
-
-
 if __name__ == "__main__":
     max_a, max_b = 999, 1000
 

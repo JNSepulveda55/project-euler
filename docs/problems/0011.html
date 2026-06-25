@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>pe_0011: Largest Product in a Grid</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="container">
+        <a class="back-link" href="../index.html">&larr; All problems</a>
+        <p class="eyebrow">pe_0011</p>
+        <h1>Largest Product in a Grid</h1>
+      </div>
+    </header>
+    <main class="container problem-page">
+      <article class="panel readme-content">
+        <h1>Largest Product in a Grid</h1>
+<h3>Problem 0011</h3>
+<p>In the $20 \times 20$ grid below, four numbers along a diagonal line have been marked in red.</p>
+<p><code>08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08</code>  <code>49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00</code>  <code>81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65</code>  <code>52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91</code>  <code>22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80</code>  <code>24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50</code>  <code>32 98 81 28 64 23 67 10</code> &lt;span style=&quot;color: red&quot;&gt;&lt;b&gt;26&lt;/b&gt;&lt;/span&gt; <code>38 40 67 59 54 70 66 18 38 64 70</code>  <code>67 26 20 68 02 62 12 20 95</code> &lt;span style=&quot;color: red&quot;&gt;&lt;b&gt;63&lt;/b&gt;&lt;/span&gt; <code>94 39 63 08 40 91 66 49 94 21</code>  <code>24 55 58 05 66 73 99 26 97 17</code> &lt;span style=&quot;color: red&quot;&gt;&lt;b&gt;78&lt;/b&gt;&lt;/span&gt; <code>78 96 83 14 88 34 89 63 72</code>  <code>21 36 23 09 75 00 76 44 20 45 35</code> &lt;span style=&quot;color: red&quot;&gt;&lt;b&gt;14&lt;/b&gt;&lt;/span&gt; <code>00 61 33 97 34 31 33 95</code>  <code>78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92</code>  <code>16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57</code>  <code>86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58</code>  <code>19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40</code>  <code>04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66</code>  <code>88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69</code>  <code>04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36</code>  <code>20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16</code>  <code>20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54</code>  <code>01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48</code> </p>
+<p>The product of these numbers is $26 \times 63 \times 78 \times 14 = 1788696$.</p>
+<p>What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the $20 \times 20$ grid?</p>
+<h1>Notes</h1>
+<ul>
+<li>This problem allows for some very nice small optimizations, but I won&#x27;t cover all of them for the sake of conciseness.</li>
+</ul>
+<h1>Solutions</h1>
+<p>This problem tests our coding skills more than our mathematical knowledge.</p>
+<p>We need to scan the grid in four directions:</p>
+<ul>
+<li>Left to right</li>
+<li>Top to bottom</li>
+<li>Top left to bottom right (diagonally)</li>
+<li>Top right to bottom left (diagonally)</li>
+</ul>
+<p>However, instead of defining four different functions, we can just do a left to right function and a top left to bottom right function and flip the grid instead, which is easier. See the example below:</p>
+<p>Say this is our grid:</p>
+<p>$$\begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4\\ 5 &amp; 6 &amp; 7 &amp; 8\\ 9 &amp; 10 &amp; 11 &amp; 12\\ 13 &amp; 14 &amp; 15 &amp; 16\\ \end{bmatrix}$$</p>
+<p>Assume we only have functions that can process rows. the first row processed would be:</p>
+<p>$$\begin{bmatrix} \textcolor{red}{1} &amp; \textcolor{red}{2} &amp; \textcolor{red}{3} &amp; \textcolor{red}{4}\\ 5 &amp; 6 &amp; 7 &amp; 8\\ 9 &amp; 10 &amp; 11 &amp; 12\\ 13 &amp; 14 &amp; 15 &amp; 16\\ \end{bmatrix}$$</p>
+<p>If we want to process the first column, we can just flip the matrix along the diagonal. this is called <em>transposing</em> a matrix:</p>
+<p>$$\begin{bmatrix} 1 &amp; 5 &amp; 9 &amp; 13\\ 2 &amp; 6 &amp; 10 &amp; 14\\ 3 &amp; 7 &amp; 11 &amp; 15\\ 4 &amp; 8 &amp; 12 &amp; 16\\ \end{bmatrix}$$</p>
+<p>Then, processing the first row of this matrix is equivalent to processing the first column of the original matrix:</p>
+<p>$$\begin{bmatrix} \textcolor{red}{1} &amp; \textcolor{red}{5} &amp; \textcolor{red}{9} &amp; \textcolor{red}{13}\\ 2 &amp; 6 &amp; 10 &amp; 14\\ 3 &amp; 7 &amp; 11 &amp; 15\\ 4 &amp; 8 &amp; 12 &amp; 16\\ \end{bmatrix}$$</p>
+<p>A similar process can be used with the diagonals if we flip the matrix horizontally.</p>
+<p>Even better, we can turn the diagonals into lists similar to rows, which can be also processed in the same way as any other row.</p>
+<h2>Solution 1</h2>
+<p>Note that processing a row is a similar procedure to the sliding window we implemented for <a href="0008.html">problem 8</a></p>
+<p>Let&#x27;s define our functions to process a row here:</p>
+<pre><code class="language-py">def process_row(row: list[int], window_size: int) -&gt; int:
+
+    # Edge case
+    if len(row) &lt; window_size:
+        return 0
+
+    product = 1
+    zeros_in_window = 0  # Keep track of zeros in the window
+
+    # Initial window product
+    for i in range(window_size):
+        number = int(row[i])
+        if number == 0:
+            zeros_in_window += 1
+        product *= number
+
+    max_product = product
+
+    for i in range(1, len(row) - window_size):
+        leaves = int(row[i-1])
+        comes = int(row[i+window_size-1])
+
+        if leaves != 0:
+            product //= leaves
+        else:
+            zeros_in_window -= 1
+
+        if comes != 0:
+            product *= comes
+        else:
+            zeros_in_window += 1
+            continue  # If there&#x27;s a 0 incoming just skip the iteration
+        
+        if product &gt; max_product and zeros_in_window == 0:
+            max_product = product
+
+    return max_product</code></pre>
+<p>With this, we can process rows and columns. Now lets create our helper function to process diagonals:</p>
+<pre><code class="language-py">def get_diagonals(matrix: list[list[int]]):
+    m, n = len(matrix), len(matrix[0])  # Get dimensions of matrix
+    num_diags = 2 * max(m, n) - 1  # You can doodle on a paper to prove this!
+    diags = [[] for _ in range(num_diags)]  # Create `num_diags` empty arrays
+
+    for i in range(m):
+        for j in range(n):
+            diags[i+j].append(matrix[i][j])
+
+    return diags</code></pre>
+<p>In this case, we&#x27;ll extract the bottom left to top right diagonals, then we can flip the matrix and do it again</p>
+<p>Now we&#x27;re ready to implement our solution:</p>
+<pre><code class="language-py">def solution_1(matrix: list[list[int]], window_size: int) -&gt; int:
+
+    def helper(row_list: list):
+        &quot;&quot;&quot;
+        Process all rows in a list and return the max product
+        &quot;&quot;&quot;
+        max_product = 0
+
+        for row in row_list:
+            max_row_product = process_row(row, window_size)
+            if max_row_product &gt; max_product:
+                max_product = max_row_product
+
+        return max_product
+
+    # Process rows:
+    rows_max = helper(matrix)
+
+    # Process columns:
+    transpose = zip(*matrix)  # This is a nice trick!
+    cols_max = helper(transpose)
+
+    # Process diagonals:
+    diags_1_max = helper(get_diagonals(matrix))
+
+    flipped = [row[::-1] for row in matrix]
+    diags_2_max = helper(get_diagonals(flipped))
+
+    return max(rows_max, cols_max, diags_1_max, diags_2_max)</code></pre>
+<h1>Helpful Links</h1>
+<ul>
+<li><a href="0008.html">Problem 8</a></li>
+</ul>
+      </article>
+
+      <section class="panel runner-panel" aria-labelledby="runner-heading">
+        <div class="section-heading">
+          <h2 id="runner-heading">Run Solution</h2>
+          <button id="run-solution" type="button">Run solution</button>
+        </div>
+        <p class="muted">Runs the checked-in Python file in your browser with Pyodide. Runtime is browser-dependent and can differ from local CPython. Execution is stopped after 30 seconds.</p>
+        <div class="output-grid" aria-live="polite">
+          <section>
+            <h3>stdout</h3>
+            <pre id="stdout" class="output-box">Click "Run solution" to execute this problem.</pre>
+          </section>
+          <section>
+            <h3>stderr / errors</h3>
+            <pre id="stderr" class="output-box"></pre>
+          </section>
+          <section>
+            <h3>Runtime</h3>
+            <pre id="runtime" class="output-box"></pre>
+          </section>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="source-heading">
+        <div class="section-heading">
+          <h2 id="source-heading">Python Source</h2>
+          <span>pe_0011.py</span>
+        </div>
+        <pre class="source-code"><code>&quot;&quot;&quot;
+Implementation of the solutions for the problem 11 of Project Euler
+
+See the README file for the explanation of the solutions
+&quot;&quot;&quot;
+
+import sys
+from pathlib import Path
+
+# Allow running this file directly while still importing from the repo root.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from utils import timer
+
+def process_row(row: list[int], window_size: int) -&gt; int:
+
+    # Edge case
+    if len(row) &lt; window_size:
+        return 0
+
+    product = 1
+    zeros_in_window = 0  # Keep track of zeros in the window
+
+    # Initial window product
+    for i in range(window_size):
+        number = int(row[i])
+        if number == 0:
+            zeros_in_window += 1
+        product *= number
+
+    max_product = product
+
+    for i in range(1, len(row) - window_size):
+        leaves = int(row[i-1])
+        comes = int(row[i+window_size-1])
+
+        if leaves != 0:
+            product //= leaves
+        else:
+            zeros_in_window -= 1
+
+        if comes != 0:
+            product *= comes
+        else:
+            zeros_in_window += 1
+            continue  # If there&#x27;s a 0 incoming just skip the iteration
+        
+        if product &gt; max_product and zeros_in_window == 0:
+            max_product = product
+
+    return max_product
+
+def get_diagonals(matrix: list[list[int]]):
+    m, n = len(matrix), len(matrix[0])  # Get dimensions of matrix
+    num_diags = 2 * max(m, n) - 1  # You can doodle on a paper to prove this!
+    diags = [[] for _ in range(num_diags)]  # Create `num_diags` empty arrays
+
+    for i in range(m):
+        for j in range(n):
+            diags[i+j].append(matrix[i][j])
+
+    return diags
+
+
+@timer
+def solution_1(matrix: list[list[int]], window_size: int) -&gt; int:
+
+    def helper(row_list: list):
+        &quot;&quot;&quot;
+        Process all rows in a list and return the max product
+        &quot;&quot;&quot;
+        max_product = 0
+
+        for row in row_list:
+            max_row_product = process_row(row, window_size)
+            if max_row_product &gt; max_product:
+                max_product = max_row_product
+
+        return max_product
+
+    # Process rows:
+    rows_max = helper(matrix)
+
+    # Process columns:
+    transpose = zip(*matrix)  # This is a nice trick!
+    cols_max = helper(transpose)
+
+    # Process diagonals:
+    diags_1_max = helper(get_diagonals(matrix))
+
+    flipped = [row[::-1] for row in matrix]
+    diags_2_max = helper(get_diagonals(flipped))
+
+    return max(rows_max, cols_max, diags_1_max, diags_2_max)
+
+
+if __name__ == &quot;__main__&quot;:
+    matrix = [&quot;08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08&quot;,
+                &quot;49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00&quot;,
+                &quot;81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65&quot;,
+                &quot;52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91&quot;,
+                &quot;22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80&quot;,
+                &quot;24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50&quot;,
+                &quot;32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70&quot;,
+                &quot;67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21&quot;,
+                &quot;24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72&quot;,
+                &quot;21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95&quot;,
+                &quot;78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92&quot;,
+                &quot;16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57&quot;,
+                &quot;86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58&quot;,
+                &quot;19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40&quot;,
+                &quot;04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66&quot;,
+                &quot;88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69&quot;,
+                &quot;04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36&quot;,
+                &quot;20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16&quot;,
+                &quot;20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54&quot;,
+                &quot;01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot;]
+
+    matrix = [row.split() for row in matrix]
+
+    window_size = 4
+
+    solution_1(matrix, window_size)
+</code></pre>
+      </section>
+
+      <script type="application/json" id="solution-payload">{"entrypoint": "pe_0011/pe_0011.py", "files": {"pe_0011/pe_0011.py": "\"\"\"\nImplementation of the solutions for the problem 11 of Project Euler\n\nSee the README file for the explanation of the solutions\n\"\"\"\n\nimport sys\nfrom pathlib import Path\n\n# Allow running this file directly while still importing from the repo root.\nsys.path.insert(0, str(Path(__file__).resolve().parents[1]))\n\nfrom utils import timer\n\ndef process_row(row: list[int], window_size: int) -> int:\n\n    # Edge case\n    if len(row) < window_size:\n        return 0\n\n    product = 1\n    zeros_in_window = 0  # Keep track of zeros in the window\n\n    # Initial window product\n    for i in range(window_size):\n        number = int(row[i])\n        if number == 0:\n            zeros_in_window += 1\n        product *= number\n\n    max_product = product\n\n    for i in range(1, len(row) - window_size):\n        leaves = int(row[i-1])\n        comes = int(row[i+window_size-1])\n\n        if leaves != 0:\n            product //= leaves\n        else:\n            zeros_in_window -= 1\n\n        if comes != 0:\n            product *= comes\n        else:\n            zeros_in_window += 1\n            continue  # If there's a 0 incoming just skip the iteration\n        \n        if product > max_product and zeros_in_window == 0:\n            max_product = product\n\n    return max_product\n\ndef get_diagonals(matrix: list[list[int]]):\n    m, n = len(matrix), len(matrix[0])  # Get dimensions of matrix\n    num_diags = 2 * max(m, n) - 1  # You can doodle on a paper to prove this!\n    diags = [[] for _ in range(num_diags)]  # Create `num_diags` empty arrays\n\n    for i in range(m):\n        for j in range(n):\n            diags[i+j].append(matrix[i][j])\n\n    return diags\n\n\n@timer\ndef solution_1(matrix: list[list[int]], window_size: int) -> int:\n\n    def helper(row_list: list):\n        \"\"\"\n        Process all rows in a list and return the max product\n        \"\"\"\n        max_product = 0\n\n        for row in row_list:\n            max_row_product = process_row(row, window_size)\n            if max_row_product > max_product:\n                max_product = max_row_product\n\n        return max_product\n\n    # Process rows:\n    rows_max = helper(matrix)\n\n    # Process columns:\n    transpose = zip(*matrix)  # This is a nice trick!\n    cols_max = helper(transpose)\n\n    # Process diagonals:\n    diags_1_max = helper(get_diagonals(matrix))\n\n    flipped = [row[::-1] for row in matrix]\n    diags_2_max = helper(get_diagonals(flipped))\n\n    return max(rows_max, cols_max, diags_1_max, diags_2_max)\n\n\nif __name__ == \"__main__\":\n    matrix = [\"08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\",\n                \"49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00\",\n                \"81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65\",\n                \"52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91\",\n                \"22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80\",\n                \"24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50\",\n                \"32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70\",\n                \"67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21\",\n                \"24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72\",\n                \"21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95\",\n                \"78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92\",\n                \"16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57\",\n                \"86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58\",\n                \"19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40\",\n                \"04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66\",\n                \"88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69\",\n                \"04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36\",\n                \"20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16\",\n                \"20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54\",\n                \"01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48\"]\n\n    matrix = [row.split() for row in matrix]\n\n    window_size = 4\n\n    solution_1(matrix, window_size)\n", "utils/__init__.py": "from .utils import *\n", "utils/utils.py": "\"\"\"\nThis file contains useful functions that may be used\nto get to the solution for a problem or just implement\nnice functionalities like timing a code\n\"\"\"\n\nfrom time import time\nfrom functools import wraps\n\ndef timer(original_function=None, *, print_result=True):\n    \"\"\"\n    Time the function and optionally print result\n    \"\"\"\n    def _timer(function):\n        \n        @wraps(function)\n        def wrapped_function(*args, **kwargs):\n            start = time()\n            result = function(*args, **kwargs)\n            end = time()\n            print(f\"Function {function.__name__} ran in {end-start:.5f} seconds.\")\n            if print_result:\n                print(f\"The function's output is: {result}\")\n\n            return result\n\n        return wrapped_function\n    \n    if original_function:\n        return _timer(original_function)\n    \n    return _timer\n\n\ndef is_prime(n: int) -> bool:\n    \"\"\"\n    Check if a positive integer is a prime number.\n    From PE_0003.\n    \"\"\"\n    # Edge case not covered in the problem but necessary\n    if n < 2:\n        return False\n\n    sqrtn = n ** 0.5\n    for i in range(2, int(sqrtn) + 1):\n\n        # If it has a divisor return false\n        if n % i == 0:\n            return False\n\n    # It finished the loop so it has no divisors. Return True\n    return True\n\n\ndef is_palindrome(n: int) -> bool:\n    \"\"\"\n    Returns True if the number reads the same l2r and r2l.\n    From PE_0004\n    \"\"\"\n    return str(n) == str(n)[::-1]\n\n\ndef sieve_of_eratosthenes(n: int) -> list:\n    \"\"\"\n    Find all primes under a limit n and returns them as a list.\n    From PE_0010\n    \"\"\"\n    if n <= 1:  # Edge case\n        return []\n    \n    if n == 2:\n        return [2]\n\n    # [0, 1, 2] + [odd, even] (n//2 - 1) times + [odd] if n is odd\n    sieve = [False, False, True] + [True, False] * (n//2 - 1) + ([False] if n%2 else [])\n    p = 1\n    while p * p <= n:\n        # Find next non-crossed number\n        p += 2\n        while p * p < n and not sieve[p]:\n            p += 2\n\n        # Cross out non-primes\n        sieve[p*p::p] = [False] * ((n - p**2)//p + 1) \n        \n    return [i for i in range(n) if sieve[i]]\n\n\ndef prime_decomposition(n: int) -> dict:\n    \"\"\"\n    Find the prime decomposition of an integer.\n    Return format is a dictionary with entries {prime: power}.\n    From PE_0012\n    \"\"\"\n\n    if n <= 1:\n        return {}  # Edge case\n    \n    decomposition = {}\n\n    for i in range(n//2 + 1):\n\n        if is_prime(i):\n            if n % i == 0:\n                decomposition[i] = 0  # Create dictionary entry for prime\n\n            while n % i == 0:\n                n //= i\n                decomposition[i] += 1  # Update exponent for prime\n\n        if n == 1:\n            break\n\n    return decomposition\n\n\ndef factorial(n: int) -> int:\n    \"\"\"\n    Compute the factorial of a number.\n    From PE_0015\n    \"\"\"\n\n    assert n >= 0,      \"n should be non-negative\"\n    assert int(n) == n, \"n should be an integer\"\n\n    result = 1\n    for i in range(1, n+1):\n        result *= i\n\n    return result\n\n\ndef divisors(n: int, proper: bool = False) -> list[int]:\n    \"\"\"\n    Find the divisors of a number.\n    Returns a list of unordered divisors.\n    \"\"\"\n    if proper:\n        divisors = [1]\n    else:\n        divisors = [1, n]\n\n    for i in range(2, int(n**0.5)+1):\n        if n % i == 0:\n            divisors.append(i)\n            \n            if n//i != i:\n                divisors.append(n//i)\n\n    return divisors\n\n\nif __name__ == \"__main__\":\n    \n    pass"}, "problem": "pe_0011", "timeoutMs": 30000}</script>
+    </main>
+
+    <script src="../assets/runner.js" defer></script>
+  </body>
+</html>

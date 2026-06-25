@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>pe_0005: Smallest Multiple</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="container">
+        <a class="back-link" href="../index.html">&larr; All problems</a>
+        <p class="eyebrow">pe_0005</p>
+        <h1>Smallest Multiple</h1>
+      </div>
+    </header>
+    <main class="container problem-page">
+      <article class="panel readme-content">
+        <h1>Smallest Multiple</h1>
+<h3>Problem 0005</h3>
+<p>$2520$ is the smallest number that can be divided by each of the numbers from $1$ to $10$ without any remainder.</p>
+<p>What is the smallest positive number that is &lt;strong&gt;evenly divisible&lt;/strong&gt; by all of the numbers from $1$ to $20$?</p>
+<h1>Notes</h1>
+<ul>
+<li><strong>Evenly divisible:</strong> divisible with no remainder</li>
+</ul>
+<h1>Solutions</h1>
+<p>In other words, we&#x27;re being asked what&#x27;s the minumum common multiple of all numbers $1$ through $20$.</p>
+<p>A naïve first approach would be to just multiply all numbers 1 to 20 together, but this won&#x27;t be the right answer, which we can easily illustrate with an example:</p>
+<p>$1 \cdot 2 \cdot 3 \cdot 4 = 24$, but the smallest number evenly divisible by the numbers $1, 2, 3$ and $4$. This is because 4 is already a multiple of 2, so we do not need to multiply by 2 and 4, just by 4.</p>
+<h2>Solution 1</h2>
+<p>In order to detect this systematically, we can keep track of the highest exponent in the prime factorization of the numbers in order. So in the case of $n = 10$, it would look like this:</p>
+<p>Call $S$ the solution. We initialize $S = 1$.</p>
+<p>$1 = \textcolor{red}{1} \to S = \textcolor{red}{1}$</p>
+<p>$2 = \textcolor{red}{2} \to S = \textcolor{red}{2}$</p>
+<p>$3 = \textcolor{red}{3} \to S = 2 \cdot \textcolor{red}{3}$</p>
+<p>$4 = \textcolor{red}{2^2} \to S = \textcolor{red}{2^2} \cdot 3$</p>
+<p>$5 = \textcolor{red}{5} \to S = 2^2 \cdot 3 \cdot \textcolor{red}{5}$</p>
+<p>$6 = 2 \cdot 3 \to S = 2^2 \cdot 3 \cdot 5$</p>
+<p>$7 = \textcolor{red}{7} \to S = 2^2 \cdot 3 \cdot 5 \cdot \textcolor{red}{7}$</p>
+<p>$8 = \textcolor{red}{2^3} \to S = \textcolor{red}{2^3} \cdot 3 \cdot 5 \cdot 7$</p>
+<p>$9 = \textcolor{red}{3^2} \to S = 2^3 \cdot \textcolor{red}{3^2} \cdot 5 \cdot 7$</p>
+<p>$10 = 2 \cdot 5 \to S = 2^3 \cdot 3^2 \cdot 5 \cdot 7$</p>
+<p>Then, $S = 2^3 \cdot 3^2 \cdot 5 \cdot 7 = 2520$, like stated in the example. We can keep doing this with the numbers 11 - 20 like this:</p>
+<p>$11 = \textcolor{red}{11} \to S = 2^3 \cdot 3^2 \cdot 5 \cdot 7 \cdot \textcolor{red}{11}$</p>
+<p>$12 = 2^2 \cdot 3 \to S = 2^3 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11$</p>
+<p>$13 = \textcolor{red}{13} \to S = 2^3 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot \textcolor{red}{13}$</p>
+<p>$14 = 2 \cdot 7 \to S = 2^3 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13$</p>
+<p>$15 = 3 \cdot 5 \to S = 2^3 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13$</p>
+<p>$16 = \textcolor{red}{2^4} \to S = \textcolor{red}{2^4} \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13$</p>
+<p>$17 = \textcolor{red}{17} \to S = 2^4 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot \textcolor{red}{17}$</p>
+<p>$18 = 2 \cdot 3^2 \to S = 2^4 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17$</p>
+<p>$19 = \textcolor{red}{19} \to S = 2^4 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 \cdot \textcolor{red}{19}$</p>
+<p>$20 = 2^2 \cdot 5 \to S = 2^4 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 \cdot 19$</p>
+<p>Finally, our solution is $S = 2^4 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 \cdot 19 = 232792560$</p>
+<h2>Solution 2</h2>
+<p>The last solution gave us an interesting insight: The solution is just the product of every prime lower than $n$ to its highest power that is also smaller than $n$. See the breakdown:</p>
+<p>$2^4 = 16 \leq 20$ but $2^5 = 32 &gt; 20$</p>
+<p>$3^2 = 9 \leq 20$ but $3^3 = 27 &gt; 20$</p>
+<p>$5 \leq 20$ but $5^2 = 25 &gt; 20$</p>
+<p>Ans so on ...</p>
+<p>We can easily translate this to code by finding all prime numbers smaller than $n$ and keep track of their highest power lower than $n$.</p>
+<pre><code class="language-py">def solution_2(limit: int) -&gt; int:
+    prime_powers = []
+    result = 1
+
+    # Iterate over all numbers less than limit
+    for i in range(1, limit+1):
+
+        # If prime, find greatest power under limit
+        if is_prime(i):
+            max_pow = 1
+            curr_num = i
+
+            while curr_num * i &lt;= limit:
+                curr_num *= i
+                max_pow += 1
+            
+            result *= curr_num
+
+    return result</code></pre>
+<h1>Helpful Links</h1>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic">Fundamental theorem of arithmetic</a></li>
+</ul>
+      </article>
+
+      <section class="panel runner-panel" aria-labelledby="runner-heading">
+        <div class="section-heading">
+          <h2 id="runner-heading">Run Solution</h2>
+          <button id="run-solution" type="button">Run solution</button>
+        </div>
+        <p class="muted">Runs the checked-in Python file in your browser with Pyodide. Runtime is browser-dependent and can differ from local CPython. Execution is stopped after 30 seconds.</p>
+        <div class="output-grid" aria-live="polite">
+          <section>
+            <h3>stdout</h3>
+            <pre id="stdout" class="output-box">Click "Run solution" to execute this problem.</pre>
+          </section>
+          <section>
+            <h3>stderr / errors</h3>
+            <pre id="stderr" class="output-box"></pre>
+          </section>
+          <section>
+            <h3>Runtime</h3>
+            <pre id="runtime" class="output-box"></pre>
+          </section>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="source-heading">
+        <div class="section-heading">
+          <h2 id="source-heading">Python Source</h2>
+          <span>pe_0005.py</span>
+        </div>
+        <pre class="source-code"><code>&quot;&quot;&quot;
+Implementation of the solutions for the problem 5 of Project Euler
+
+See the README file for the explanation of the solutions
+&quot;&quot;&quot;
+
+import sys
+from pathlib import Path
+
+# Allow running this file directly while still importing from the repo root.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from utils import timer, is_prime
+
+
+@timer
+def solution_2(limit: int) -&gt; int:
+    prime_powers = []
+    result = 1
+
+    # Iterate over all numbers less than limit
+    for i in range(1, limit+1):
+
+        # If prime, find greatest power under limit
+        if is_prime(i):
+            max_pow = 1
+            curr_num = i
+
+            while curr_num * i &lt;= limit:
+                curr_num *= i
+                max_pow += 1
+            
+            # Keep track of the product of the results
+            result *= curr_num
+
+    return result
+
+if __name__ == &quot;__main__&quot;:
+    limit = 20
+
+    # No code for solution 1
+    solution_2(limit)
+</code></pre>
+      </section>
+
+      <script type="application/json" id="solution-payload">{"entrypoint": "pe_0005/pe_0005.py", "files": {"pe_0005/pe_0005.py": "\"\"\"\nImplementation of the solutions for the problem 5 of Project Euler\n\nSee the README file for the explanation of the solutions\n\"\"\"\n\nimport sys\nfrom pathlib import Path\n\n# Allow running this file directly while still importing from the repo root.\nsys.path.insert(0, str(Path(__file__).resolve().parents[1]))\n\nfrom utils import timer, is_prime\n\n\n@timer\ndef solution_2(limit: int) -> int:\n    prime_powers = []\n    result = 1\n\n    # Iterate over all numbers less than limit\n    for i in range(1, limit+1):\n\n        # If prime, find greatest power under limit\n        if is_prime(i):\n            max_pow = 1\n            curr_num = i\n\n            while curr_num * i <= limit:\n                curr_num *= i\n                max_pow += 1\n            \n            # Keep track of the product of the results\n            result *= curr_num\n\n    return result\n\nif __name__ == \"__main__\":\n    limit = 20\n\n    # No code for solution 1\n    solution_2(limit)\n", "utils/__init__.py": "from .utils import *\n", "utils/utils.py": "\"\"\"\nThis file contains useful functions that may be used\nto get to the solution for a problem or just implement\nnice functionalities like timing a code\n\"\"\"\n\nfrom time import time\nfrom functools import wraps\n\ndef timer(original_function=None, *, print_result=True):\n    \"\"\"\n    Time the function and optionally print result\n    \"\"\"\n    def _timer(function):\n        \n        @wraps(function)\n        def wrapped_function(*args, **kwargs):\n            start = time()\n            result = function(*args, **kwargs)\n            end = time()\n            print(f\"Function {function.__name__} ran in {end-start:.5f} seconds.\")\n            if print_result:\n                print(f\"The function's output is: {result}\")\n\n            return result\n\n        return wrapped_function\n    \n    if original_function:\n        return _timer(original_function)\n    \n    return _timer\n\n\ndef is_prime(n: int) -> bool:\n    \"\"\"\n    Check if a positive integer is a prime number.\n    From PE_0003.\n    \"\"\"\n    # Edge case not covered in the problem but necessary\n    if n < 2:\n        return False\n\n    sqrtn = n ** 0.5\n    for i in range(2, int(sqrtn) + 1):\n\n        # If it has a divisor return false\n        if n % i == 0:\n            return False\n\n    # It finished the loop so it has no divisors. Return True\n    return True\n\n\ndef is_palindrome(n: int) -> bool:\n    \"\"\"\n    Returns True if the number reads the same l2r and r2l.\n    From PE_0004\n    \"\"\"\n    return str(n) == str(n)[::-1]\n\n\ndef sieve_of_eratosthenes(n: int) -> list:\n    \"\"\"\n    Find all primes under a limit n and returns them as a list.\n    From PE_0010\n    \"\"\"\n    if n <= 1:  # Edge case\n        return []\n    \n    if n == 2:\n        return [2]\n\n    # [0, 1, 2] + [odd, even] (n//2 - 1) times + [odd] if n is odd\n    sieve = [False, False, True] + [True, False] * (n//2 - 1) + ([False] if n%2 else [])\n    p = 1\n    while p * p <= n:\n        # Find next non-crossed number\n        p += 2\n        while p * p < n and not sieve[p]:\n            p += 2\n\n        # Cross out non-primes\n        sieve[p*p::p] = [False] * ((n - p**2)//p + 1) \n        \n    return [i for i in range(n) if sieve[i]]\n\n\ndef prime_decomposition(n: int) -> dict:\n    \"\"\"\n    Find the prime decomposition of an integer.\n    Return format is a dictionary with entries {prime: power}.\n    From PE_0012\n    \"\"\"\n\n    if n <= 1:\n        return {}  # Edge case\n    \n    decomposition = {}\n\n    for i in range(n//2 + 1):\n\n        if is_prime(i):\n            if n % i == 0:\n                decomposition[i] = 0  # Create dictionary entry for prime\n\n            while n % i == 0:\n                n //= i\n                decomposition[i] += 1  # Update exponent for prime\n\n        if n == 1:\n            break\n\n    return decomposition\n\n\ndef factorial(n: int) -> int:\n    \"\"\"\n    Compute the factorial of a number.\n    From PE_0015\n    \"\"\"\n\n    assert n >= 0,      \"n should be non-negative\"\n    assert int(n) == n, \"n should be an integer\"\n\n    result = 1\n    for i in range(1, n+1):\n        result *= i\n\n    return result\n\n\ndef divisors(n: int, proper: bool = False) -> list[int]:\n    \"\"\"\n    Find the divisors of a number.\n    Returns a list of unordered divisors.\n    \"\"\"\n    if proper:\n        divisors = [1]\n    else:\n        divisors = [1, n]\n\n    for i in range(2, int(n**0.5)+1):\n        if n % i == 0:\n            divisors.append(i)\n            \n            if n//i != i:\n                divisors.append(n//i)\n\n    return divisors\n\n\nif __name__ == \"__main__\":\n    \n    pass"}, "problem": "pe_0005", "timeoutMs": 30000}</script>
+    </main>
+
+    <script src="../assets/runner.js" defer></script>
+  </body>
+</html>

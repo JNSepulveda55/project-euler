@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>pe_0032: Pandigital Products</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="container">
+        <a class="back-link" href="../index.html">&larr; All problems</a>
+        <p class="eyebrow">pe_0032</p>
+        <h1>Pandigital Products</h1>
+      </div>
+    </header>
+    <main class="container problem-page">
+      <article class="panel readme-content">
+        <h1>Pandigital Products</h1>
+<h3>Problem 0032</h3>
+<p>We shall say that an $n$-digit number is pandigital if it makes use of all the digits $1$ to $n$ exactly once; for example, the $5$-digit number, $15234$, is $1$ through $5$ pandigital.</p>
+<p>The product $7254$ is unusual, as the identity, $39 \times 186 = 7254$, containing multiplicand, multiplier, and product is $1$ through $9$ pandigital.</p>
+<p>Find the sum of all products whose multiplicand/multiplier/product identity can be written as a $1$ through $9$ pandigital.</p>
+<p>&lt;div&gt;HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.&lt;/div&gt;</p>
+<h1>Solutions</h1>
+<p>We&#x27;ll solve this by brute-force. However, we can make our like easier by noting the following:</p>
+<ol>
+<li>We need to use all digits $1$ through $9$. This means we have a max of 10 digits.</li>
+<li>If $a$ is a number with $d_a$ digits and $b$ is a number with $d_b$ digits, then $a \times b$ has at least $d_a + d_b - 1$ digits and at most $d_a + d_b$ digits.</li>
+</ol>
+<p>Let&#x27;s call $a \times b = c$, with $d_c$ being the number of digits of $c$. For this problem we also have that $d_a + d_b + d_c = 9$</p>
+<p>Assuming that $d_a \le d_b$, then the only triplets $(d_a, d_b, d_c)$ that follow all constraints are $(1, 4, 4)$ and $(2, 3, 4)$.</p>
+<p>We can find them by hand, or just use this small scrip to print them:</p>
+<pre><code class="language-python">for da in range(1, 10):
+    for db in range(da, 10):
+        dc = 9 - da - db
+        if da + db - 1 &lt;= dc &lt;= da + db:
+            print(f&quot;({da}, {db}, {dc})&quot;)</code></pre>
+<p>Then we know that a is $a$ one-digit or two-digit number, and $b$ is a three-digit or four-digit number.</p>
+<h2>Solution 1</h2>
+<p>We can solve the problem using brute-force like this:</p>
+<pre><code class="language-py">def solution_1() -&gt; int:
+    solutions = set()  # Store in a set so that we only count once
+    for a in range(100):
+        for b in range(100, 10000):
+            c = a * b
+            # Join the digits of the numbers in a string
+            digits = str(a) + str(b) + str(c)
+            if set(digits) == set(&quot;123456789&quot;) and len(digits) == 9:
+                solutions.add(c)
+    
+    return sum(solutions)</code></pre>
+      </article>
+
+      <section class="panel runner-panel" aria-labelledby="runner-heading">
+        <div class="section-heading">
+          <h2 id="runner-heading">Run Solution</h2>
+          <button id="run-solution" type="button">Run solution</button>
+        </div>
+        <p class="muted">Runs the checked-in Python file in your browser with Pyodide. Runtime is browser-dependent and can differ from local CPython. Execution is stopped after 30 seconds.</p>
+        <div class="output-grid" aria-live="polite">
+          <section>
+            <h3>stdout</h3>
+            <pre id="stdout" class="output-box">Click "Run solution" to execute this problem.</pre>
+          </section>
+          <section>
+            <h3>stderr / errors</h3>
+            <pre id="stderr" class="output-box"></pre>
+          </section>
+          <section>
+            <h3>Runtime</h3>
+            <pre id="runtime" class="output-box"></pre>
+          </section>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="source-heading">
+        <div class="section-heading">
+          <h2 id="source-heading">Python Source</h2>
+          <span>pe_0032.py</span>
+        </div>
+        <pre class="source-code"><code>&quot;&quot;&quot;
+Implementation of the solutions for the problem 32 of Project Euler
+
+See the README file for the explanation of the solutions
+&quot;&quot;&quot;
+
+import sys
+from pathlib import Path
+
+# Allow running this file directly while still importing from the repo root.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from utils import timer
+
+
+@timer
+def solution_1() -&gt; int:
+    solutions = set()  # Store in a set so that we only count once
+    for a in range(100):
+        for b in range(100, 10000):
+            c = a * b
+            # Join the digits of the numbers in a string
+            digits = str(a) + str(b) + str(c)
+            if set(digits) == set(&quot;123456789&quot;) and len(digits) == 9:
+                solutions.add(c)
+    
+    return sum(solutions)
+
+if __name__ == &quot;__main__&quot;:
+    solution_1()
+
+</code></pre>
+      </section>
+
+      <script type="application/json" id="solution-payload">{"entrypoint": "pe_0032/pe_0032.py", "files": {"pe_0032/pe_0032.py": "\"\"\"\nImplementation of the solutions for the problem 32 of Project Euler\n\nSee the README file for the explanation of the solutions\n\"\"\"\n\nimport sys\nfrom pathlib import Path\n\n# Allow running this file directly while still importing from the repo root.\nsys.path.insert(0, str(Path(__file__).resolve().parents[1]))\n\nfrom utils import timer\n\n\n@timer\ndef solution_1() -> int:\n    solutions = set()  # Store in a set so that we only count once\n    for a in range(100):\n        for b in range(100, 10000):\n            c = a * b\n            # Join the digits of the numbers in a string\n            digits = str(a) + str(b) + str(c)\n            if set(digits) == set(\"123456789\") and len(digits) == 9:\n                solutions.add(c)\n    \n    return sum(solutions)\n\nif __name__ == \"__main__\":\n    solution_1()\n\n", "utils/__init__.py": "from .utils import *\n", "utils/utils.py": "\"\"\"\nThis file contains useful functions that may be used\nto get to the solution for a problem or just implement\nnice functionalities like timing a code\n\"\"\"\n\nfrom time import time\nfrom functools import wraps\n\ndef timer(original_function=None, *, print_result=True):\n    \"\"\"\n    Time the function and optionally print result\n    \"\"\"\n    def _timer(function):\n        \n        @wraps(function)\n        def wrapped_function(*args, **kwargs):\n            start = time()\n            result = function(*args, **kwargs)\n            end = time()\n            print(f\"Function {function.__name__} ran in {end-start:.5f} seconds.\")\n            if print_result:\n                print(f\"The function's output is: {result}\")\n\n            return result\n\n        return wrapped_function\n    \n    if original_function:\n        return _timer(original_function)\n    \n    return _timer\n\n\ndef is_prime(n: int) -> bool:\n    \"\"\"\n    Check if a positive integer is a prime number.\n    From PE_0003.\n    \"\"\"\n    # Edge case not covered in the problem but necessary\n    if n < 2:\n        return False\n\n    sqrtn = n ** 0.5\n    for i in range(2, int(sqrtn) + 1):\n\n        # If it has a divisor return false\n        if n % i == 0:\n            return False\n\n    # It finished the loop so it has no divisors. Return True\n    return True\n\n\ndef is_palindrome(n: int) -> bool:\n    \"\"\"\n    Returns True if the number reads the same l2r and r2l.\n    From PE_0004\n    \"\"\"\n    return str(n) == str(n)[::-1]\n\n\ndef sieve_of_eratosthenes(n: int) -> list:\n    \"\"\"\n    Find all primes under a limit n and returns them as a list.\n    From PE_0010\n    \"\"\"\n    if n <= 1:  # Edge case\n        return []\n    \n    if n == 2:\n        return [2]\n\n    # [0, 1, 2] + [odd, even] (n//2 - 1) times + [odd] if n is odd\n    sieve = [False, False, True] + [True, False] * (n//2 - 1) + ([False] if n%2 else [])\n    p = 1\n    while p * p <= n:\n        # Find next non-crossed number\n        p += 2\n        while p * p < n and not sieve[p]:\n            p += 2\n\n        # Cross out non-primes\n        sieve[p*p::p] = [False] * ((n - p**2)//p + 1) \n        \n    return [i for i in range(n) if sieve[i]]\n\n\ndef prime_decomposition(n: int) -> dict:\n    \"\"\"\n    Find the prime decomposition of an integer.\n    Return format is a dictionary with entries {prime: power}.\n    From PE_0012\n    \"\"\"\n\n    if n <= 1:\n        return {}  # Edge case\n    \n    decomposition = {}\n\n    for i in range(n//2 + 1):\n\n        if is_prime(i):\n            if n % i == 0:\n                decomposition[i] = 0  # Create dictionary entry for prime\n\n            while n % i == 0:\n                n //= i\n                decomposition[i] += 1  # Update exponent for prime\n\n        if n == 1:\n            break\n\n    return decomposition\n\n\ndef factorial(n: int) -> int:\n    \"\"\"\n    Compute the factorial of a number.\n    From PE_0015\n    \"\"\"\n\n    assert n >= 0,      \"n should be non-negative\"\n    assert int(n) == n, \"n should be an integer\"\n\n    result = 1\n    for i in range(1, n+1):\n        result *= i\n\n    return result\n\n\ndef divisors(n: int, proper: bool = False) -> list[int]:\n    \"\"\"\n    Find the divisors of a number.\n    Returns a list of unordered divisors.\n    \"\"\"\n    if proper:\n        divisors = [1]\n    else:\n        divisors = [1, n]\n\n    for i in range(2, int(n**0.5)+1):\n        if n % i == 0:\n            divisors.append(i)\n            \n            if n//i != i:\n                divisors.append(n//i)\n\n    return divisors\n\n\nif __name__ == \"__main__\":\n    \n    pass"}, "problem": "pe_0032", "timeoutMs": 30000}</script>
+    </main>
+
+    <script src="../assets/runner.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>pe_0001: Multiples of 3 or 5</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="container">
+        <a class="back-link" href="../index.html">&larr; All problems</a>
+        <p class="eyebrow">pe_0001</p>
+        <h1>Multiples of 3 or 5</h1>
+      </div>
+    </header>
+    <main class="container problem-page">
+      <article class="panel readme-content">
+        <h1>Multiples of 3 or 5</h1>
+<h3>Problem 1</h3>
+<p>If we list all the natural numbers below $10$ that are multiples of $3$ or $5$, we get $3$, $5$, $6$ and $9$. The sum of these multiples is 23.</p>
+<p>Find the sum of all the multiples of $3$ or $5$ below $1000$.</p>
+<h1>Notes</h1>
+<ul>
+<li>Refer first to <a href="0006.html">Problem 6</a> if you want a similar problem</li>
+</ul>
+<h1>Solutions</h1>
+<h2>Solution 1:</h2>
+<p>The easiest way to solve this problem is to translate to code what the problem is asking us to do:</p>
+<p><strong><em>multiples of $3$:</em></strong> <code>if number % 3 == 0</code></p>
+<p><strong><em>or $5$:</em></strong> <code>or number % 5 == 0</code></p>
+<p><strong><em>below $1000$:</em></strong> <code>for number in range(1, n)</code></p>
+<p><strong><em>Find the sum:</em></strong> <code>multiples_sum = 0</code>, <code>multiples_sum += number</code></p>
+<p>With this, we iterate over all (natural) numbers under $1000$ and add them to the sum if they are either multiples of $3$ (divisible by $3$) or multiples of $5$ (divisible by $5$).</p>
+<pre><code class="language-py"># Solution 1
+
+def solution_1(limit: int) -&gt; int:
+
+    multiples_sum = 0
+    for number in range(1, limit):
+        if number % 3 == 0 or number % 5 == 0:
+            multiples_sum += number
+
+    return multiples_sum</code></pre>
+<h2>Solution 2:</h2>
+<p>Let&#x27;s take a look at the sum of the multiples of $3$ under $1000$:</p>
+<p>Let $S_n$ denote the sum of the multiples of $n$ below a thousand. Then,</p>
+<p>$S_3 = 3 + 6 + 9 + 12 + 15 + 18 + ... + 990 + 993 + 996 + 999$</p>
+<p>Note that:</p>
+<p>$S_3 = 3 \left(1 + 2 + 3 + 4 + 5 + 6 + ... + 330 + 331 + 332 + 333   \right) = 3\sum_{i = 1}^{333}{i}$</p>
+<p>And following a similar procedure,</p>
+<p>$S_5 = 5 \left(1 + 2 + 3 + 4 + 5 + 6 + ... + 196 + 197 + 198 + 199   \right) = 5\sum_{i = 1}^{199}{i}$</p>
+<p>Where the 333 and 199 are obtained like this:</p>
+<p>$\lfloor \frac{1000 - 1}{3}\rfloor = 333$ and $\lfloor \frac{1000 - 1}{5}\rfloor = 199$</p>
+<p>Using the formula for the sum of the first n natural numbers we get:</p>
+<p>$S_3 = 3\frac{(333)(334)}{2} $ and $S_5 = \sum_{i = 1}^{199}{i} = 3\frac{(199)(200)}{2}$.</p>
+<p>If we are not cautious, it is easy to think that since we need the sum of the multiples of three or five, that the answer is just $S_3 + S_5$. However, this would be a mistake because we would be including some numbers twice, namely, the multiples of 15.</p>
+<p>Its easy to see this if we use set theory:</p>
+<p>$\sum{A} + \sum{B} = \sum{A\cup B} + \sum{A\cap B}$</p>
+<p>From which we get:</p>
+<p>$\sum{A\cup B} = \sum{A} + \sum{B} - \sum{A\cap B}$</p>
+<p>So,</p>
+<p>$Solution = S_3 + S_5 - S_{15}$</p>
+<p>Which corresponds to the return statement in the function <code>solution_2</code>:</p>
+<p><code>return S(3) + S(5) - S(15)</code>.</p>
+<pre><code class="language-py"># Solution 2
+
+def solution_2(limit: int) -&gt; int:
+
+    def sum_first_n(n:int) -&gt; int:
+        return n*(n+1)//2
+    
+    def S(n: int) -&gt; int:
+        return n * sum_first_n((limit-1)//n) 
+
+    return S(3) + S(5) - S(15)</code></pre>
+<p># Helpful Links</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_⋯">Sum of the first $n$ numbers</a></li>
+</ul>
+      </article>
+
+      <section class="panel runner-panel" aria-labelledby="runner-heading">
+        <div class="section-heading">
+          <h2 id="runner-heading">Run Solution</h2>
+          <button id="run-solution" type="button">Run solution</button>
+        </div>
+        <p class="muted">Runs the checked-in Python file in your browser with Pyodide. Runtime is browser-dependent and can differ from local CPython. Execution is stopped after 30 seconds.</p>
+        <div class="output-grid" aria-live="polite">
+          <section>
+            <h3>stdout</h3>
+            <pre id="stdout" class="output-box">Click "Run solution" to execute this problem.</pre>
+          </section>
+          <section>
+            <h3>stderr / errors</h3>
+            <pre id="stderr" class="output-box"></pre>
+          </section>
+          <section>
+            <h3>Runtime</h3>
+            <pre id="runtime" class="output-box"></pre>
+          </section>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="source-heading">
+        <div class="section-heading">
+          <h2 id="source-heading">Python Source</h2>
+          <span>pe_0001.py</span>
+        </div>
+        <pre class="source-code"><code>&quot;&quot;&quot;
+Implementation of the solutions for the problem 1 of Project Euler
+
+See the README file for the explanation of the solutions
+&quot;&quot;&quot;
+
+import sys
+from pathlib import Path
+
+# Allow running this file directly while still importing from the repo root.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from utils import timer
+
+# Solution 1
+
+@timer
+def solution_1(limit: int) -&gt; int:
+
+    multiples_sum = 0
+    for number in range(1, limit):
+        if number % 3 == 0 or number % 5 == 0:
+            multiples_sum += number
+
+    return multiples_sum
+
+# Solution 2
+@timer
+def solution_2(limit: int) -&gt; int:
+
+    def sum_first_n(n:int) -&gt; int:
+        return n*(n+1)//2
+    
+    def S(n: int) -&gt; int:
+        return n * sum_first_n((limit-1)//n) 
+
+    return S(3) + S(5) - S(15)
+
+if __name__ == &quot;__main__&quot;:
+
+    limit = 1000
+    solution_1(limit)
+    solution_2(limit)
+</code></pre>
+      </section>
+
+      <script type="application/json" id="solution-payload">{"entrypoint": "pe_0001/pe_0001.py", "files": {"pe_0001/pe_0001.py": "\"\"\"\nImplementation of the solutions for the problem 1 of Project Euler\n\nSee the README file for the explanation of the solutions\n\"\"\"\n\nimport sys\nfrom pathlib import Path\n\n# Allow running this file directly while still importing from the repo root.\nsys.path.insert(0, str(Path(__file__).resolve().parents[1]))\n\nfrom utils import timer\n\n# Solution 1\n\n@timer\ndef solution_1(limit: int) -> int:\n\n    multiples_sum = 0\n    for number in range(1, limit):\n        if number % 3 == 0 or number % 5 == 0:\n            multiples_sum += number\n\n    return multiples_sum\n\n# Solution 2\n@timer\ndef solution_2(limit: int) -> int:\n\n    def sum_first_n(n:int) -> int:\n        return n*(n+1)//2\n    \n    def S(n: int) -> int:\n        return n * sum_first_n((limit-1)//n) \n\n    return S(3) + S(5) - S(15)\n\nif __name__ == \"__main__\":\n\n    limit = 1000\n    solution_1(limit)\n    solution_2(limit)\n", "utils/__init__.py": "from .utils import *\n", "utils/utils.py": "\"\"\"\nThis file contains useful functions that may be used\nto get to the solution for a problem or just implement\nnice functionalities like timing a code\n\"\"\"\n\nfrom time import time\nfrom functools import wraps\n\ndef timer(original_function=None, *, print_result=True):\n    \"\"\"\n    Time the function and optionally print result\n    \"\"\"\n    def _timer(function):\n        \n        @wraps(function)\n        def wrapped_function(*args, **kwargs):\n            start = time()\n            result = function(*args, **kwargs)\n            end = time()\n            print(f\"Function {function.__name__} ran in {end-start:.5f} seconds.\")\n            if print_result:\n                print(f\"The function's output is: {result}\")\n\n            return result\n\n        return wrapped_function\n    \n    if original_function:\n        return _timer(original_function)\n    \n    return _timer\n\n\ndef is_prime(n: int) -> bool:\n    \"\"\"\n    Check if a positive integer is a prime number.\n    From PE_0003.\n    \"\"\"\n    # Edge case not covered in the problem but necessary\n    if n < 2:\n        return False\n\n    sqrtn = n ** 0.5\n    for i in range(2, int(sqrtn) + 1):\n\n        # If it has a divisor return false\n        if n % i == 0:\n            return False\n\n    # It finished the loop so it has no divisors. Return True\n    return True\n\n\ndef is_palindrome(n: int) -> bool:\n    \"\"\"\n    Returns True if the number reads the same l2r and r2l.\n    From PE_0004\n    \"\"\"\n    return str(n) == str(n)[::-1]\n\n\ndef sieve_of_eratosthenes(n: int) -> list:\n    \"\"\"\n    Find all primes under a limit n and returns them as a list.\n    From PE_0010\n    \"\"\"\n    if n <= 1:  # Edge case\n        return []\n    \n    if n == 2:\n        return [2]\n\n    # [0, 1, 2] + [odd, even] (n//2 - 1) times + [odd] if n is odd\n    sieve = [False, False, True] + [True, False] * (n//2 - 1) + ([False] if n%2 else [])\n    p = 1\n    while p * p <= n:\n        # Find next non-crossed number\n        p += 2\n        while p * p < n and not sieve[p]:\n            p += 2\n\n        # Cross out non-primes\n        sieve[p*p::p] = [False] * ((n - p**2)//p + 1) \n        \n    return [i for i in range(n) if sieve[i]]\n\n\ndef prime_decomposition(n: int) -> dict:\n    \"\"\"\n    Find the prime decomposition of an integer.\n    Return format is a dictionary with entries {prime: power}.\n    From PE_0012\n    \"\"\"\n\n    if n <= 1:\n        return {}  # Edge case\n    \n    decomposition = {}\n\n    for i in range(n//2 + 1):\n\n        if is_prime(i):\n            if n % i == 0:\n                decomposition[i] = 0  # Create dictionary entry for prime\n\n            while n % i == 0:\n                n //= i\n                decomposition[i] += 1  # Update exponent for prime\n\n        if n == 1:\n            break\n\n    return decomposition\n\n\ndef factorial(n: int) -> int:\n    \"\"\"\n    Compute the factorial of a number.\n    From PE_0015\n    \"\"\"\n\n    assert n >= 0,      \"n should be non-negative\"\n    assert int(n) == n, \"n should be an integer\"\n\n    result = 1\n    for i in range(1, n+1):\n        result *= i\n\n    return result\n\n\ndef divisors(n: int, proper: bool = False) -> list[int]:\n    \"\"\"\n    Find the divisors of a number.\n    Returns a list of unordered divisors.\n    \"\"\"\n    if proper:\n        divisors = [1]\n    else:\n        divisors = [1, n]\n\n    for i in range(2, int(n**0.5)+1):\n        if n % i == 0:\n            divisors.append(i)\n            \n            if n//i != i:\n                divisors.append(n//i)\n\n    return divisors\n\n\nif __name__ == \"__main__\":\n    \n    pass"}, "problem": "pe_0001", "timeoutMs": 30000}</script>
+    </main>
+
+    <script src="../assets/runner.js" defer></script>
+  </body>
+</html>

@@ -1,12 +1,22 @@
 # Project Euler Solutions
 
-This is my personal Project Euler workspace.
+This is my pesonal Project Euler Repo.
 
-I solve these problems as a hobby, mostly for the fun of thinking through the
-math, writing down the reasoning, and keeping a record of different approaches.
-The goal is not to build a polished library or the fastest possible solution for
-every problem. If a simple solution is clear and runs quickly enough, that is
-usually good enough.
+Most of the problem I've solved I did during undergrad, and since I would just sit at a random computer and write code,
+I only have a few of my original solutions for the problems, and even if I have the original code, I have no idea of what my thought process was when
+writing that specific piece of code.
+
+This motivated me to redo evey problem but including a thorough explanation of my thought process for each problem. This repo is effectively an archive for my solutions.
+However, I also thought it would be fun to share my solutions through github. If you're stuck on a problem I would recommend trying your best to solve it by yourself first!
+Seeing someone else's solution is only like $1%$ as actually solving the problem. Once you've solved it come back and check if our answers match!
+
+If you want to collaborate with your own solutions to the already posted problems, you can submit a pull request and I'll gladly accept your contribution!
+Also if you find any error you can also submit a PR or just hit me up at `jn.sepulveda55@gmail.com`
+
+I'm glad you found this repo and I hope you enjoy it!
+
+Try the webpage version [here](https://jnsepulveda55.github.io/project-euler).
+
 
 ## Repository Structure
 
@@ -68,31 +78,6 @@ python3 create_problem.py 42 --destination-root /path/to/output
 
 The script needs network access because it reads the problem page from
 `projecteuler.net`.
-
-## GitHub Pages Site
-
-This repo includes a small static site generator for GitHub Pages. It scans the
-`pe_XXXX` problem folders, renders the README files, embeds the Python source,
-and creates browser-runnable pages using Pyodide.
-
-Build the site locally:
-
-```bash
-python3 scripts/build_site.py
-```
-
-Preview it locally:
-
-```bash
-cd docs
-python3 -m http.server 8000
-```
-
-Then open `http://localhost:8000`.
-
-To publish it on GitHub Pages, go to the repository settings, open **Pages**,
-and set the source to **GitHub Actions**. The included workflow builds and
-deploys the `docs/` folder on pushes to `main`.
 
 ## Collaboration
 

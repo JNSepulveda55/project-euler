@@ -134,6 +134,7 @@ def divisors(n: int, proper: bool = False) -> list[int]:
     """
     Find the divisors of a number.
     Returns a list of unordered divisors.
+    From PE_0021
     """
     if proper:
         divisors = [1]
@@ -149,6 +150,17 @@ def divisors(n: int, proper: bool = False) -> list[int]:
 
     return divisors
 
+
+def gcd(a: int, b: int) -> int:
+    """
+    Find the greatest common divisor (gcd) between two integers
+    From PE_0033
+    """
+    while True:
+        if b == 0:
+            return a
+        
+        a, b = b, a%b
 
 if __name__ == "__main__":
     

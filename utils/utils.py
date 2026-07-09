@@ -162,6 +162,19 @@ def gcd(a: int, b: int) -> int:
         
         a, b = b, a%b
 
+
+def dec2base(n: int, base: int) -> str:
+    """
+    Return a string representation of a number in a specific base
+    From PE_0036
+    """
+    new_num = ""
+    while n != 0:
+        new_num = str(n % base) + new_num
+        n //= base
+
+    return new_num
+
 if __name__ == "__main__":
     
     pass
